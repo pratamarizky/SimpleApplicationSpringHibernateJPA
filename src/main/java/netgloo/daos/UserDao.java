@@ -1,4 +1,4 @@
-package netgloo.models;
+package netgloo.daos;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+
+import netgloo.models.User;
 
 /**
  * This class is used to access data for the User entity.

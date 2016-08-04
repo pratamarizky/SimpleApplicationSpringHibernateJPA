@@ -1,7 +1,7 @@
 package netgloo.controllers;
 
+import netgloo.daos.UserDao;
 import netgloo.models.User;
-import netgloo.models.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
