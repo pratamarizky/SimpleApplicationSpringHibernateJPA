@@ -1,4 +1,4 @@
-package netgloo.controllers;
+package com.controllers;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import netgloo.daos.EmployeeDao;
-import netgloo.models.Employee;
+import com.models.Employee;
+import com.repositories.EmployeeDao;
 
 @RestController
 public class EmployeeController {

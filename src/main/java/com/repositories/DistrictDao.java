@@ -1,4 +1,4 @@
-package netgloo.daos;
+package com.repositories;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import netgloo.models.District;
+import com.models.District;
 @Repository
 @Transactional
 public class DistrictDao {

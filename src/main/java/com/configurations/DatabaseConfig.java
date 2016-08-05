@@ -1,4 +1,4 @@
-package netgloo.configs;
+package com.configurations;
 
 import java.util.Properties;
 

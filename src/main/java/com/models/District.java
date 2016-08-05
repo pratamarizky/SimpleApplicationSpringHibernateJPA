@@ -1,4 +1,4 @@
-package netgloo.models;
+package com.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package netgloo.models;
+package com.models;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package netgloo.controllers;
+package com.controllers;
 
 import java.util.List;
 
@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
-
-import netgloo.daos.DistrictDao;
-import netgloo.models.District;
+import com.models.District;
+import com.repositories.DistrictDao;
 @RestController
 public class DistrictController {
 	
