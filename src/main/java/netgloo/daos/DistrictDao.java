@@ -4,9 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
 
 import netgloo.models.District;
-
+@Repository
+@Transactional
 public class DistrictDao {
 	// ------------------------
 	  // PUBLIC METHODS

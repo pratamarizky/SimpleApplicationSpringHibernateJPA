@@ -3,12 +3,15 @@ package netgloo.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import netgloo.daos.EmployeeDao;
 import netgloo.models.Employee;
 
+@RestController
 public class EmployeeController {
 	@RequestMapping(value="/employee/save")
 	  @ResponseBody

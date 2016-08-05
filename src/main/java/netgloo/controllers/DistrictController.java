@@ -3,14 +3,16 @@ package netgloo.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import netgloo.daos.DistrictDao;
 import netgloo.models.District;
-
+@RestController
 public class DistrictController {
 	
 	@RequestMapping(value="/district/create")
