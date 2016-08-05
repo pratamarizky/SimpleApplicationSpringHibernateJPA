@@ -15,12 +15,14 @@ import netgloo.models.District;
 @RestController
 public class DistrictController {
 	
-	@RequestMapping(value="/district/create")
+	@RequestMapping(value="/district/save")
 	  @ResponseBody
 	  public String create(String districtCode, String districtName) {
 	    try {
 	      District district = new District(districtCode, districtName);
-	      districtDao.create(district);
+	      if(districtDao.getById(districtCode)!= null){
+	    	  districtDao.update(district);
+	      }else districtDao.create(district);
 	    }
 	    catch (Exception ex) {
 	      return "Error creating the district: " + ex.toString();
