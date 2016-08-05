@@ -1,4 +1,4 @@
-package com.controllers;
+package com.simpleapp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
   @RequestMapping("/")
-  @ResponseBody
   public String index() {
-    return "redirect:/webapp/index.html";
+    return "redirect:app/index.html";
   }
 
 }

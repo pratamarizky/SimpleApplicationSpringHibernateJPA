@@ -1,4 +1,4 @@
-package com.configurations;
+package com.simpleapp.configurations;
 
 import java.util.Properties;
 

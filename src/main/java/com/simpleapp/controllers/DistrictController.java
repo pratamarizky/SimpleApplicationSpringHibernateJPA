@@ -1,4 +1,4 @@
-package com.controllers;
+package com.simpleapp.controllers;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.models.District;
-import com.repositories.DistrictDao;
+import com.simpleapp.models.District;
+import com.simpleapp.repositories.DistrictDao;
 @RestController
 public class DistrictController {
 	
