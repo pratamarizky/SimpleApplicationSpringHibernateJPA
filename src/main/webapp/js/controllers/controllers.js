@@ -1,8 +1,11 @@
 'use strict';
 
-var simpleAppController = angular.module('simpleAppController',[]);
-simpleAppController.controller('inputController',
-    function ($scope, $http, $window) {
+var simpleAppController = angular.module('simpleAppController', []);
+simpleAppController.run(function ($rootScope) {
+    $rootScope.test = new Date();
+})
+    .controller('inputController',
+    function ($scope, $rootScope, $http, $window) {
         $scope.title = "input";
 
         $scope.genderData = [
