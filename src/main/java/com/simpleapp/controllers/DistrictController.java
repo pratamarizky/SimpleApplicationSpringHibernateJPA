@@ -16,7 +16,7 @@ public class DistrictController {
 	
 	@RequestMapping(value="/district/save")
 	  @ResponseBody
-	  public String create(String districtCode, String districtName) {
+	  public boolean save(String districtCode, String districtName) {
 	    try {
 	      District district = new District(districtCode, districtName);
 	      if(districtDao.getById(districtCode)!= null){
@@ -24,33 +24,37 @@ public class DistrictController {
 	      }else districtDao.create(district);
 	    }
 	    catch (Exception ex) {
-	      return "Error creating the district: " + ex.toString();
+	      System.out.println("Error creating the district: " + ex.toString());
+	      return false;
 	    }
-	    return "District succesfully created!";
+	    System.out.println("District succesfully created!");
+	    return true;
 	  }
 	
 	@RequestMapping(value="/district/getDistrictByCode")
 	  @ResponseBody
-	  public String getDistrictByCode(String districtCode) {
+	  public District getDistrictByCode(String districtCode) {
 	    try {
 	    	District district = districtDao.getById(districtCode);
-	    	return "The district name is: " + district.getDistrictName();
+	    	return district;
 	    }
 	    catch (Exception ex) {
-	    	return "District not found: " + ex.toString();
+	    	ex.printStackTrace();
+	    	return null;
 	    }
 	    
 	  }
 	
 	@RequestMapping(value="/district/getAll")
 	  @ResponseBody
-	  public String getAllDistrict() {
+	  public List<District> getAllDistrict() {
 	    try {
 	    	List<District> listdistrict = districtDao.getAll();
-	    	return "The list district is: " + listdistrict.size();
+	    	return listdistrict;
 	    }
 	    catch (Exception ex) {
-	    	return "District not found: " + ex.toString();
+	    	ex.printStackTrace();
+	    	return null;
 	    }
 	    
 	  }

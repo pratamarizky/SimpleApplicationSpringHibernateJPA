@@ -15,39 +15,42 @@ import com.simpleapp.repositories.EmployeeDao;
 public class EmployeeController {
 	@RequestMapping(value="/employee/save")
 	  @ResponseBody
-	  public String save(Employee employee) {
+	  public boolean save(Employee employee) {
 	    try {
 	      employeeDao.create(employee);
 	    }
 	    catch (Exception ex) {
-	      return "Error creating the employee: " + ex.toString();
+	      System.out.println("Error creating the employee: " + ex.toString());
+	      return false;
 	    }
-	    return "Employee succesfully created!";
+	    System.out.println("Employee succesfully created!");
+	    return true;
 	  }
 	
 	@RequestMapping(value="/employee/getEmployeeByCode")
 	  @ResponseBody
-	  public String getEmployeeByCode(String employeeCode) {
+	  public Employee getEmployeeByCode(String employeeCode) {
 	    try {
 	    	Employee employee = employeeDao.getById(employeeCode);
-	    	return "The employee name is: " + employee.getEmployeeName();
+	    	return employee;
 	    }
 	    catch (Exception ex) {
-	    	return "Employee not found: " + ex.toString();
+	    	System.out.println(ex.getMessage());
 	    }
-	    
+	    return null;
 	  }
 	
 	@RequestMapping(value="/employee/getAll")
 	  @ResponseBody
-	  public String getAllEmployee() {
+	  public List<Employee> getAllEmployee() {
 	    try {
 	    	List<Employee> listemployee = employeeDao.getAll();
-	    	return "The list employee is: " + listemployee.size();
+	    	return listemployee;
 	    }
 	    catch (Exception ex) {
-	    	return "Employee not found: " + ex.toString();
+	    	ex.printStackTrace();
 	    }
+	    return null;
 	    
 	  }
 	// ------------------------
