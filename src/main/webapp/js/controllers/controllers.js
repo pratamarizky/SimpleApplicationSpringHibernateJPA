@@ -1,6 +1,7 @@
 'use strict';
 
-simpleApp.controller('inputController',
+var simpleAppController = angular.module('simpleAppController',[]);
+simpleAppController.controller('inputController',
     function ($scope, $http, $window) {
         $scope.title = "input";
 
