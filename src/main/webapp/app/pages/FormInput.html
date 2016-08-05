@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Nama Karyawan</label>
-            <input id="simple-input" type="text" class="k-textbox" style="width: 100%;" />
-
+            <input id="simple-input" type="text" ng-model="name" class="k-textbox" style="width: 100%;" />
         </div>
         <div class="col-md-3">
 
@@ -31,14 +30,14 @@
 
         <div class="col-md-6">
             <label for="simple-textarea">Alamat</label>
-            <textarea id="simple-textarea" class="k-textbox" style="width: 100%;"></textarea>
+            <textarea id="simple-textarea" ng-model="address" class="k-textbox" style="width: 100%;"></textarea>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Kelurahan</label>
-            <input kendo-combo-box ng-model="kelurahan" k-options='kelurahanOptions' style="width: 100%;" />
+            <input kendo-combo-box ng-model="district" k-options='districtOptions' style="width: 100%;" />
         </div>
     </div>
     <br>

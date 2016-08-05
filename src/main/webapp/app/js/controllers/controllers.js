@@ -22,17 +22,17 @@ simpleAppController.run(function ($rootScope) {
             }
         }
 
-        $scope.kelurahanData = [
+        $scope.districtData = [
             { name: 'Andir', value: 1 },
             { name: 'Cicendo', value: 2 }
         ];
 
-        $scope.kelurahanOptions = {
+        $scope.districtOptions = {
             placeholder: "'Select...'",
             dataTextField: 'name',
             dataValueField: 'value',
             dataSource: {
-                data: $scope.kelurahanData
+                data: $scope.districtData
             }
         }
 
