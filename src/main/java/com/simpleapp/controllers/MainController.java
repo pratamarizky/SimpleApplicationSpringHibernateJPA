@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MainController {
 
-  @RequestMapping("/")
+	@RequestMapping("/")
   public String index() {
-    return "redirect:index.html";
+		System.out.println("masuk Index");
+    return "redirect:/app/index.html";
   }
 
 }
