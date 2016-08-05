@@ -9,7 +9,7 @@ public class MainController {
 
   @RequestMapping("/")
   public String index() {
-    return "redirect:app/index.html";
+    return "redirect:index.html";
   }
 
 }
