@@ -5,7 +5,6 @@
 .worksheet/
 bin/
 build/
-dist/
 logs/
 node_modules/
 out/
