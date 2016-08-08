@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,12 +15,13 @@ import com.simpleapp.repositories.DistrictDao;
 @RestController
 public class DistrictController {
 	
-	@RequestMapping(value="/district/save")
+	@RequestMapping(value="/district/save", method= RequestMethod.POST)
 	  @ResponseBody
-	  public boolean save(String districtCode, String districtName) {
+	  public boolean save(District district) {
 	    try {
-	      District district = new District(districtCode, districtName);
-	      if(districtDao.getById(districtCode)!= null){
+	    	System.out.println(district.getDistrictName());
+//	      District district = new District(districtCode, districtName);
+	      if(districtDao.getById(district.getDistrictCode())!= null){
 	    	  districtDao.update(district);
 	      }else districtDao.create(district);
 	    }
@@ -31,7 +33,7 @@ public class DistrictController {
 	    return true;
 	  }
 	
-	@RequestMapping(value="/district/getDistrictByCode")
+	@RequestMapping(value="/district/getDistrictByCode", method=RequestMethod.GET)
 	  @ResponseBody
 	  public District getDistrictByCode(String districtCode) {
 	    try {
@@ -45,7 +47,7 @@ public class DistrictController {
 	    
 	  }
 	
-	@RequestMapping(value="/district/getAll")
+	@RequestMapping(value="/district/getAll", method=RequestMethod.GET)
 	  @ResponseBody
 	  public List<District> getAllDistrict() {
 	    try {

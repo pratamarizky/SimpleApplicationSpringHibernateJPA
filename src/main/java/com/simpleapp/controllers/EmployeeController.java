@@ -1,19 +1,24 @@
 package com.simpleapp.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.simpleapp.models.Employee;
 import com.simpleapp.repositories.EmployeeDao;
 
 @RestController
 public class EmployeeController {
-	@RequestMapping(value="/employee/save")
+	@RequestMapping(value="/employee/save", method=RequestMethod.POST)
 	  @ResponseBody
 	  public boolean save(Employee employee) {
 	    try {
@@ -27,30 +32,39 @@ public class EmployeeController {
 	    return true;
 	  }
 	
-	@RequestMapping(value="/employee/getEmployeeByCode")
+	@RequestMapping(value="/employee/getEmployeeByCode", method=RequestMethod.GET)
 	  @ResponseBody
-	  public Employee getEmployeeByCode(String employeeCode) {
+	  public String getEmployeeByCode(String employeeCode) {
 	    try {
 	    	Employee employee = employeeDao.getById(employeeCode);
-	    	return employee;
+	    	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+	    	ow = ow.with(new SimpleDateFormat("dd-MM-YYYY"));
+	    	String json = ow.writeValueAsString(employee);
+	    	System.out.println(json);
+	    	return json;
 	    }
 	    catch (Exception ex) {
 	    	System.out.println(ex.getMessage());
 	    }
-	    return null;
+	    return "";
 	  }
 	
-	@RequestMapping(value="/employee/getAll")
+	@RequestMapping(value="/employee/getAll", method=RequestMethod.GET)
 	  @ResponseBody
-	  public List<Employee> getAllEmployee() {
+	  public String getAllEmployee() {
 	    try {
 	    	List<Employee> listemployee = employeeDao.getAll();
-	    	return listemployee;
+	    	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+	    	ow = ow.with(new SimpleDateFormat("dd-MM-YYYY"));
+	    	String json = ow.writeValueAsString(listemployee);
+	    	System.out.println(json);
+	    	return json;
+	    	
 	    }
 	    catch (Exception ex) {
 	    	ex.printStackTrace();
 	    }
-	    return null;
+	    return "";
 	    
 	  }
 	// ------------------------
