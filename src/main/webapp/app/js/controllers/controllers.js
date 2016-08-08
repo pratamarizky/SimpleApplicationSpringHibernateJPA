@@ -1,8 +1,8 @@
 'use strict';
 
-var simpleAppControllers = angular.module('simpleAppControllers', ['simpleAppServices']);
+var simpleAppControllers = angular.module('simpleAppControllers', []);
 simpleAppControllers.run(function ($rootScope, $route) {
-    $rootScope.selectedEmployee = {};
+    $rootScope.dateFormat = 'dd-MMMM-yyyy';
 })
     .controller('inputController',['$scope', '$rootScope', 'Employee',
     function ($scope, $rootScope, Employee) {
@@ -47,7 +47,6 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 gender: "Pria",
                 joinDate: "1988-10-21T13:28:06.419Z",
                 address: "Bandung"
-
             },
             {
                 name: "Hasna",
@@ -66,21 +65,25 @@ simpleAppControllers.run(function ($rootScope, $route) {
         ];
 
         $scope.gridColumns = [
-            { field: "name", title: "Nama" },
-            { field: "bornDate", title: "Tanggal Lahir" },
+            { field: "employeeName", title: "Nama" },
+            { field: "birthDate", type:"date", title: "Tanggal Lahir" },
             { field: "gender", title: "Tanggal Lahir" },
             { field: "joinDate", title: "Tanggal Masuk" },
-            { field: "address", title: "Alamat" }
+            { field: "employeeAddress", title: "Alamat" }
         ];
         $scope.onChange = function (data) {
             $scope.selected = data;
+            console.log(moment($scope.selected.joinDate).format("DD-MM-YYYY"));
         };
+        
 
-        // Employee.getAll().then(function success(data) {
-        //     $scope.gridData = data.data;
-        // }, function error(error) {
-        //     console.log(error);
-        // });
+        Employee.getAll().then(function success(data) {
+            $scope.gridData = data.data;
+        }, function error(error) {
+            console.log(error);
+        });
+
+       
 
         // $scope.selectEmployee = function (employee) {
         //     $rootScope.selectedEmployee = Employee;
