@@ -1,11 +1,11 @@
 'use strict';
 
-var simpleAppControllers = angular.module('simpleAppControllers', []);
-simpleAppControllers.run(function ($rootScope) {
+var simpleAppControllers = angular.module('simpleAppControllers', ['simpleAppServices']);
+simpleAppControllers.run(function ($rootScope, $route) {
     $rootScope.selectedEmployee = {};
 })
-    .controller('inputController',
-    function ($scope, $rootScope, $http, $window) {
+    .controller('inputController',['$scope', '$rootScope', 'Employee',
+    function ($scope, $rootScope, Employee) {
         $scope.title = "input";
 
         $scope.genderData = [
@@ -36,39 +36,8 @@ simpleAppControllers.run(function ($rootScope) {
             }
         }
 
-        $scope.countryNames = [
-            "Albania",
-            "Andorra",
-            "Armenia",
-            "Austria",
-            "Azerbaijan",
-            "Belarus",
-            "Belgium",
-            "Bosnia & Herzegovina",
-            "Bulgaria",
-            "Croatia",
-            "Cyprus",
-            "Czech Republic",
-            "Denmark",
-            "Estonia",
-            "Finland",
-            "France",
-            "Georgia",
-            "Germany",
-            "Greece",
-            "Hungary",
-            "Iceland",
-            "Ireland",
-            "Italy",
-            "Kosovo",
-            "Latvia",
-            "Liechtenstein",
-            "Lithuania",
-            "Luxembourg",
-            "Macedonia",
-            "Malta",
-            "Moldova",
-            "Monaco"
+        $scope.searchEmployees = [
+            "Asep"
         ];
 
         $scope.gridData = [
@@ -113,13 +82,8 @@ simpleAppControllers.run(function ($rootScope) {
         //     console.log(error);
         // });
 
-        $scope.selectEmployee = function (employee) {
-            $rootScope.selectedEmployee = Employee;
-        };
+        // $scope.selectEmployee = function (employee) {
+        //     $rootScope.selectedEmployee = Employee;
+        // };
 
-    });
-
-simpleAppControllers.controller('EmployeeListCtrl', function ($scope, $rootScope, Employee, $location) {
-
-
-});
+    }]);
