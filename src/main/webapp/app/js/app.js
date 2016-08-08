@@ -1,5 +1,5 @@
 // create the module and name it simpleApp
-var simpleApp = angular.module('simpleApp', ['kendo.directives','ngRoute','simpleAppController']);
+var simpleApp = angular.module('simpleApp', ['kendo.directives','ngRoute','simpleAppControllers']);
 
 // configure our routes
 simpleApp.config(['$routeProvider',

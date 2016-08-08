@@ -1,8 +1,8 @@
 'use strict';
 
-var simpleAppController = angular.module('simpleAppController', []);
-simpleAppController.run(function ($rootScope) {
-    $rootScope.test = new Date();
+var simpleAppControllers = angular.module('simpleAppControllers', []);
+simpleAppControllers.run(function ($rootScope) {
+    $rootScope.selectedEmployee = {};
 })
     .controller('inputController',
     function ($scope, $rootScope, $http, $window) {
@@ -68,25 +68,7 @@ simpleAppController.run(function ($rootScope) {
             "Macedonia",
             "Malta",
             "Moldova",
-            "Monaco",
-            "Montenegro",
-            "Netherlands",
-            "Norway",
-            "Poland",
-            "Portugal",
-            "Romania",
-            "Russia",
-            "San Marino",
-            "Serbia",
-            "Slovakia",
-            "Slovenia",
-            "Spain",
-            "Sweden",
-            "Switzerland",
-            "Turkey",
-            "Ukraine",
-            "United Kingdom",
-            "Vatican City"
+            "Monaco"
         ];
 
         $scope.gridData = [
@@ -121,13 +103,23 @@ simpleAppController.run(function ($rootScope) {
             { field: "joinDate", title: "Tanggal Masuk" },
             { field: "address", title: "Alamat" }
         ];
-        $scope.update = function () {
-            $scope.gridData[0].track = "Hey you";
-            console.log($scope.gridData);
-        };
         $scope.onChange = function (data) {
             $scope.selected = data;
         };
 
+        // Employee.getAll().then(function success(data) {
+        //     $scope.gridData = data.data;
+        // }, function error(error) {
+        //     console.log(error);
+        // });
+
+        $scope.selectEmployee = function (employee) {
+            $rootScope.selectedEmployee = Employee;
+        };
 
     });
+
+simpleAppControllers.controller('EmployeeListCtrl', function ($scope, $rootScope, Employee, $location) {
+
+
+});

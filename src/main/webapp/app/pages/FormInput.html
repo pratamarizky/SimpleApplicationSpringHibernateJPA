@@ -20,8 +20,6 @@
         </div>
     </div>
 
-
-
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Tanggal Masuk</label>
@@ -44,15 +42,19 @@
     <br>
 
     <div class="row">
-        <div class="col-md-offset-8 col-md-3">
+        <div class="col-md-offset-9 col-md-3">
             <input kendo-auto-complete ng-model="country" k-data-source="countryNames" style="width: 100%;" />
             <p class="demo-hint">
-        </div>       
+        </div>
     </div>
-    <div kendo-grid
-         k-data-source="gridData"
-         k-columns="gridColumns"
-         k-selectable="true"
-         k-on-change="onChange(data)">
-         </div>
+    <div kendo-grid k-data-source="gridData" k-columns="gridColumns" k-selectable="true" k-on-change="onChange(data)">
+    </div>
+    <br>
+    <br>
+    <div class="col-md-offset-10">
+        <kendo-button ng-click="onClick1()">Save</kendo-button>
+        <kendo-button ng-click="onClick2()">Hapus</kendo-button>
+        <kendo-button ng-click="onClick3()">Batal</kendo-button>
+    </div>
+
 </div>
