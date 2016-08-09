@@ -13,18 +13,26 @@ simpleAppServices.factory('Employee', ['$resource', '$rootScope', '$http',
                     url: urlBase + '/getAll',
                     method: "GET"
                 })
+            },
+            save: function (data) {
+                return $http({
+                    url: urlBase + '/save',
+                    method: "POST",
+                    'Content-Type':'application/json',
+                    data : data
+                })
             }
         }
     }]);
 
-simpleAppServices.factory('createEmployee', ['$resource', '$rootScope', '$http',
+simpleAppServices.factory('saveEmployee', ['$resource', '$rootScope', '$http',
     function ($resource, $rootScope, $http) {
         return $resource(
             'http://localhost:8080/employee/:id',
             { id: '@employeeCode' },//Handy for update & delete. id will be set with id of instance
             {
-                saveEmployee: {
-                    method: 'PUT' // To send the HTTP Put request when calling this custom update method.
+                update: {
+                    method: 'POST' // To send the HTTP Put request when calling this custom update method.
                 }
             }
         );

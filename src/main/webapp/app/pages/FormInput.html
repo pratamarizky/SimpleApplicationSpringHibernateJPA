@@ -16,14 +16,14 @@
         </div>
         <div class="col-md-3">
             <label for="simple-input">Tanggal Lahir</label>
-            <input kendo-date-picker ng-model="employee.bornDate" k-ng-model="bornDate" style="width: 100%;" />
+            <input kendo-date-picker ng-model="birthDate" k-ng-model="employee.birthDate" style="width: 100%;" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Tanggal Masuk</label>
-            <input kendo-date-picker ng-model="employee.joinDate" k-ng-model="joinDate" style="width: 100%;" />
+            <input kendo-date-picker ng-model="joinDate" k-ng-model="employee.joinDate" style="width: 100%;" />
         </div>
 
         <div class="col-md-6">
@@ -35,7 +35,17 @@
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Kelurahan</label>
-            <input kendo-combo-box ng-model="employee.district" k-options='districtOptions' style="width: 100%;" />
+            <!--<input kendo-combo-box ng-model="district" k-on-change="selectedDistrict(data)" k-options='districtOptions' style="width: 100%;" />-->
+            <select kendo-combo-box
+                k-placeholder="'Select product'"
+                k-ng-model="employee.district"
+                k-data-text-field="'districtName'"
+                k-data-value-field="'districtCode'"
+                k-auto-bind="false"
+                k-min-length="3"
+                k-data-source="districtDataSource"
+                style="width: 100%" >
+            </select>   
         </div>
     </div>
     <br>
@@ -52,7 +62,7 @@
     <br>
     <br>
     <div class="col-md-offset-10">
-        <kendo-button ng-click="createEmployee()">Save</kendo-button>
+        <kendo-button ng-click="createEmployee(employee)">Save</kendo-button>
         <kendo-button ng-click="onClick2()">Hapus</kendo-button>
         <kendo-button ng-click="onClick3()">Batal</kendo-button>
     </div>

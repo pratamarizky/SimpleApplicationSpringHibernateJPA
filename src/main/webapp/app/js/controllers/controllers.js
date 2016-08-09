@@ -3,20 +3,15 @@
 var simpleAppControllers = angular.module('simpleAppControllers', []);
 simpleAppControllers.run(function ($rootScope, $route) {
     $rootScope.dateFormat = 'dd-MMMM-yyyy';
-    $rootScope.employeeName;
-    $rootScope.employeeAddress;
-    $rootScope.district;
-    $rootScope.bornDate ;
-    $rootScope.joinDate ;
     $rootScope.employee = {};
 })
-    .controller('inputController', ['$scope', '$rootScope', 'Employee', 'createEmployee', 'District',
-        function ($scope, $rootScope, Employee, createEmployee, District) {
+    .controller('inputController', ['$scope', '$rootScope', 'Employee','saveEmployee', 'District',
+        function ($scope, $rootScope, Employee, saveEmployee, District) {
             $scope.title = "input";
 
             $scope.genderData = [
-                { name: 'Pria', value: "1" },
-                { name: 'Wanita', value: "2" }
+                { name: 'Pria', value: "L" },
+                { name: 'Wanita', value: "P" }
             ];
 
             $scope.genderOptions = {
@@ -29,8 +24,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
             }
 
             $scope.districtData = [
-                { districtName: 'Andir', districtCode: 1 },
-                { districtName: 'Cicendo', districtCode: 2 }
+                { districtName: 'Bandung', districtCode: "D" }
             ];
 
 
@@ -75,14 +69,24 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 // console.log(moment($scope.selected.joinDate).format("DD-MM-YYYY"));
             };
 
-            $scope.districtOptions = {
-                placeholder: "'Select...'",
-                dataTextField: 'districtName',
-                dataValueField: 'districtCode',
-                dataSource: {
-                    data: $scope.districtData
-                }
-            }
+            // $scope.selectedDistrict = function (data) {
+            //     console.log($scope.district.dataTextField);
+            //     $scope.employee.districtName = data.districtName;
+            //     $scope.employee.districtCode = data.districtCode;
+            //     // console.log(moment($scope.selected.joinDate).format("DD-MM-YYYY"));
+            // };
+
+            // $scope.districtOptions = {
+            //     placeholder: "'Select...'",
+            //     dataTextField: 'districtName',
+            //     dataValueField: 'districtCode',
+            //     dataSource: {
+            //         data: $scope.districtData
+            //     }
+            // }
+            $scope.districtDataSource = [
+                { districtName: 'Bandung', districtCode: "D" }
+            ]
 
 
             Employee.getAll().then(function success(data) {
@@ -96,6 +100,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
             }, function error(error) {
                 console.log(error);
             });
+
 
             // District.getAll().then(function success(data) {
             //     $scope.districtOptions.dataSource.data = data.data;
@@ -120,20 +125,20 @@ simpleAppControllers.run(function ($rootScope, $route) {
             // $scope.selectEmployee = function (employee) {
             //     $rootScope.selectedEmployee = Employee;
             // };
-            $scope.createEmployee = function () {
-                // $scope.employee = new createEmployee();
+            $scope.createEmployee = function (employee) {
+                
+                //$scope.employee = new Employee();
                 // $scope.employee.employeeName = employee.employeeName;
                 // $scope.employee.employeeAddress = employee.employeeAddress;
                 // $scope.employee.bornDate = employee.bornDate;
                 // $scope.employee.joinDate = employee.joinDate;
                 // console.log(employee.employeeName);
-                console.log($scope.employee.employeeName);
-                $scope.employee.saveEmployee = function () {
-                    console.log($scope.employee);
-                    $scope.employee.$save(function () {
-                        $rootScope.message = 'Form Sukses Disubmit';
-                    });
-                };
-            }
+                console.log(employee.birthDate);
+                employee.birthDate = kendo.parseDate(employee.birthDate, "yyyy-mm-dd");
+                console.log(employee.birthDate);
+                $scope.json = angular.toJson(employee);
+                console.log($scope.json);
+                Employee.save($scope.json);
+            };
 
         }]);
