@@ -3,9 +3,15 @@
 var simpleAppControllers = angular.module('simpleAppControllers', []);
 simpleAppControllers.run(function ($rootScope, $route) {
     $rootScope.dateFormat = 'dd-MMMM-yyyy';
+    $rootScope.employeeName;
+    $rootScope.employeeAddress;
+    $rootScope.district;
+    $rootScope.bornDate ;
+    $rootScope.joinDate ;
+    $rootScope.employee = {};
 })
-    .controller('inputController', ['$scope', '$rootScope', 'Employee', 'District',
-        function ($scope, $rootScope, Employee,District) {
+    .controller('inputController', ['$scope', '$rootScope', 'Employee', 'createEmployee', 'District',
+        function ($scope, $rootScope, Employee, createEmployee, District) {
             $scope.title = "input";
 
             $scope.genderData = [
@@ -27,7 +33,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 { districtName: 'Cicendo', districtCode: 2 }
             ];
 
-            
+
 
             // $scope.searchEmployees = [
             //     "Asep"
@@ -69,7 +75,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 // console.log(moment($scope.selected.joinDate).format("DD-MM-YYYY"));
             };
 
-             $scope.districtOptions = {
+            $scope.districtOptions = {
                 placeholder: "'Select...'",
                 dataTextField: 'districtName',
                 dataValueField: 'districtCode',
@@ -81,16 +87,22 @@ simpleAppControllers.run(function ($rootScope, $route) {
 
             Employee.getAll().then(function success(data) {
                 $scope.gridData = data.data;
-                var names=[];
-                angular.forEach($scope.gridData,function(value){
+                var names = [];
+                angular.forEach($scope.gridData, function (value) {
                     this.push(value.employeeName);
-                },names);
+                }, names);
                 $scope.searchEmployees = names;
                 console.log(names);
             }, function error(error) {
                 console.log(error);
             });
 
+            // District.getAll().then(function success(data) {
+            //     $scope.districtOptions.dataSource.data = data.data;
+            //     console.log($scope.districtOptions.dataSource.data);
+            // }, function error(error) {
+            //     console.log(error);
+            // });
 
             // District.getAll().then(function success(data) {
             //     $scope.districtOptions.dataSource.data = data.data;
@@ -104,9 +116,24 @@ simpleAppControllers.run(function ($rootScope, $route) {
             //     console.log(error);
             // });
 
-           
+
             // $scope.selectEmployee = function (employee) {
             //     $rootScope.selectedEmployee = Employee;
             // };
+            $scope.createEmployee = function () {
+                // $scope.employee = new createEmployee();
+                // $scope.employee.employeeName = employee.employeeName;
+                // $scope.employee.employeeAddress = employee.employeeAddress;
+                // $scope.employee.bornDate = employee.bornDate;
+                // $scope.employee.joinDate = employee.joinDate;
+                // console.log(employee.employeeName);
+                console.log($scope.employee.employeeName);
+                $scope.employee.saveEmployee = function () {
+                    console.log($scope.employee);
+                    $scope.employee.$save(function () {
+                        $rootScope.message = 'Form Sukses Disubmit';
+                    });
+                };
+            }
 
         }]);

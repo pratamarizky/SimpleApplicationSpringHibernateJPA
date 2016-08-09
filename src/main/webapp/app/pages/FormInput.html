@@ -2,40 +2,40 @@
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Nama Karyawan</label>
-            <input id="simple-input" type="text" ng-model="name" class="k-textbox" style="width: 100%;" />
+            <input id="simple-input" type="text" ng-model="employee.employeeName" class="k-textbox" style="width: 100%;" />
         </div>
         <div class="col-md-3">
 
             <div class="k-content">
 
                 <label for="simple-input">Jenis Kelamin</label>
-                <input kendo-combo-box ng-model="gender" k-options='genderOptions' style="width: 100%;" />
+                <input kendo-combo-box ng-model="employee.gender" k-options='genderOptions' style="width: 100%;" />
 
             </div>
 
         </div>
         <div class="col-md-3">
             <label for="simple-input">Tanggal Lahir</label>
-            <input kendo-date-picker ng-model="bornDate" k-ng-model="bornDate" style="width: 100%;" />
+            <input kendo-date-picker ng-model="employee.bornDate" k-ng-model="bornDate" style="width: 100%;" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Tanggal Masuk</label>
-            <input kendo-date-picker ng-model="joinDate" k-ng-model="joinDate" style="width: 100%;" />
+            <input kendo-date-picker ng-model="employee.joinDate" k-ng-model="joinDate" style="width: 100%;" />
         </div>
 
         <div class="col-md-6">
             <label for="simple-textarea">Alamat</label>
-            <textarea id="simple-textarea" ng-model="address" class="k-textbox" style="width: 100%;"></textarea>
+            <textarea id="simple-textarea" ng-model="employee.employeeAddress" class="k-textbox" style="width: 100%;"></textarea>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-5">
             <label for="simple-input">Kelurahan</label>
-            <input kendo-combo-box ng-model="district" k-options='districtOptions' style="width: 100%;" />
+            <input kendo-combo-box ng-model="employee.district" k-options='districtOptions' style="width: 100%;" />
         </div>
     </div>
     <br>
@@ -43,7 +43,7 @@
     <hr> 
     <div class="row">
         <div class="col-md-offset-9 col-md-3">
-            <input kendo-auto-complete ng-model="country" k-data-source="searchEmployees" style="width: 100%;" />
+            <input kendo-auto-complete ng-model="searchemp" k-data-source="searchEmployees" style="width: 100%;" />
             <p class="demo-hint">
         </div>
     </div>
@@ -52,7 +52,7 @@
     <br>
     <br>
     <div class="col-md-offset-10">
-        <kendo-button ng-click="onClick1()">Save</kendo-button>
+        <kendo-button ng-click="createEmployee()">Save</kendo-button>
         <kendo-button ng-click="onClick2()">Hapus</kendo-button>
         <kendo-button ng-click="onClick3()">Batal</kendo-button>
     </div>
