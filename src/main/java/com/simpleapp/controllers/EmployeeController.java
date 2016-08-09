@@ -38,7 +38,7 @@ public class EmployeeController {
 	  }
 	
 //	-------------------------------Delete----------------------------//
-	@RequestMapping(value="/employee/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/employee/delete", method=RequestMethod.DELETE)
 	  @ResponseBody
 	  public boolean delete(@RequestBody Employee employee) {
 	    try {
