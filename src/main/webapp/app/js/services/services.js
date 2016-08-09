@@ -21,7 +21,7 @@ simpleAppServices.factory('District', ['$resource', '$http',
     function ($resource, $http) {
         var urlBase = 'http://localhost:8080/district'; //get?model=userDetail&userid=123123123;
         return {
-            getDistrict: function () {
+            getAll: function () {
                 return $http({
                     url: urlBase + '/getAll',
                     method: "GET"
