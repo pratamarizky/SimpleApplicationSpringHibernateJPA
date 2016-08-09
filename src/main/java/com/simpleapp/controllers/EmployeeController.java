@@ -24,6 +24,7 @@ public class EmployeeController {
 	  @ResponseBody
 	  public boolean save(@RequestBody Employee employee) {
 	    try {
+	      System.out.println(employee.getEmployeeName());
 	      employeeDao.create(employee);
 	    }
 	    catch (Exception ex) {

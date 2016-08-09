@@ -19,7 +19,7 @@ public class DistrictController {
 	
 	@RequestMapping(value="/district/save", method= RequestMethod.POST)
 	  @ResponseBody
-	  public boolean save(@RequestParam("district") District district) {
+	  public boolean save(@RequestBody District district) {
 	    try {
 	    	System.out.println(district);
 //	      District district = new District(districtCode, districtName);
