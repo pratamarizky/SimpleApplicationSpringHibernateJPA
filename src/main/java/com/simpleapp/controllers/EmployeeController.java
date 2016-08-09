@@ -19,6 +19,7 @@ import com.simpleapp.repositories.EmployeeDao;
 
 @RestController
 public class EmployeeController {
+//	-----------------------------Update/Save--------------------------//
 	@RequestMapping(value="/employee/save", method=RequestMethod.POST)
 	  @ResponseBody
 	  public boolean save(@RequestBody Employee employee) {
@@ -26,13 +27,28 @@ public class EmployeeController {
 	      employeeDao.create(employee);
 	    }
 	    catch (Exception ex) {
-	      System.out.println("Error creating the employee: " + ex.toString());
+	      System.out.println("Error creating/updating the employee: " + ex.toString());
 	      return false;
 	    }
 	    System.out.println("Employee succesfully created!");
 	    return true;
 	  }
 	
+//	-------------------------------Delete----------------------------//
+	@RequestMapping(value="/employee/delete", method=RequestMethod.POST)
+	  @ResponseBody
+	  public boolean delete(@RequestBody Employee employee) {
+	    try {
+	      employeeDao.delete(employee);
+	    }
+	    catch (Exception ex) {
+	      System.out.println("Error delete the employee: " + ex.toString());
+	      return false;
+	    }
+	    System.out.println("Employee succesfully created!");
+	    return true;
+	  }
+//	-----------------------------Get Data--------------------------------------//
 	@RequestMapping(value="/employee/getEmployeeByCode", method=RequestMethod.GET)
 	  @ResponseBody
 	  public String getEmployeeByCode(String employeeCode) {
