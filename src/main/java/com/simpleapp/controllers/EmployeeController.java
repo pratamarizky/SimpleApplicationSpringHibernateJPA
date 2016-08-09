@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +21,7 @@ import com.simpleapp.repositories.EmployeeDao;
 public class EmployeeController {
 	@RequestMapping(value="/employee/save", method=RequestMethod.POST)
 	  @ResponseBody
-	  public boolean save(Employee employee) {
+	  public boolean save(@RequestBody Employee employee) {
 	    try {
 	      employeeDao.create(employee);
 	    }
