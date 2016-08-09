@@ -69,6 +69,18 @@ public class EmployeeDao {
 	    return;
 	  }
 
+	  public String generateCode(){
+		  String result;
+		  Employee emp = (Employee) entityManager.createQuery(
+			        "from Employee order by Employee_Code desc")
+			        .getResultList().get(0);
+		  if(emp!=null){
+			  result = emp.getEmployeeCode().substring(0, 10);
+			  int last = Integer.parseInt(emp.getEmployeeCode().substring(10, 12));
+			  return result+String.format("%03d", last);
+		  }
+		  return "EMP0131524001";
+	  }
 	  // ------------------------
 	  // PRIVATE FIELDS
 	  // ------------------------
