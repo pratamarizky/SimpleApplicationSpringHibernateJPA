@@ -74,10 +74,12 @@ public class EmployeeDao {
 		  Employee emp = (Employee) entityManager.createQuery(
 			        "from Employee order by Employee_Code desc")
 			        .getResultList().get(0);
+		  System.out.println(emp.getEmployeeCode());
 		  if(emp!=null){
 			  result = emp.getEmployeeCode().substring(0, 10);
-			  int last = Integer.parseInt(emp.getEmployeeCode().substring(10, 12));
-			  return result+String.format("%03d", last);
+			  int last = Integer.parseInt(emp.getEmployeeCode().substring(11, 13));
+			  System.out.println("data: "+emp.getEmployeeCode().substring(10, 13)+" last : "+last);
+			  return result+String.format("%03d", last+1);
 		  }
 		  return "EMP0131524001";
 	  }
