@@ -83,6 +83,11 @@ public class EmployeeDao {
 		  }
 		  return "EMP0131524001";
 	  }
+	  
+	  public List<Employee> filter(String filter){
+		  return entityManager.createQuery("FROM Employee WHERE employee_name = :filter or employee_address = :filter")
+				  .setParameter("filter", filter).getResultList();
+	  }
 	  // ------------------------
 	  // PRIVATE FIELDS
 	  // ------------------------

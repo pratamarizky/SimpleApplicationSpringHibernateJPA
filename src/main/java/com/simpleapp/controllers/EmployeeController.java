@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -87,6 +89,27 @@ public class EmployeeController {
 	    return "";
 	    
 	  }
+	
+//------------------------------------Filter---------------------------//
+	@RequestMapping(value="/employee/get/{filter}", method=RequestMethod.GET)
+	  @ResponseBody
+	  public String getResultFilter(@PathVariable("filter") String filter){
+		try {
+			System.out.println(filter);
+	    	List<Employee> listemployee = employeeDao.filter(filter);
+	    	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+	    	ow = ow.with(new SimpleDateFormat("dd-MM-YYYY"));
+	    	String json = ow.writeValueAsString(listemployee);
+	    	System.out.println(json);
+	    	return json;
+	    	
+	    }
+	    catch (Exception ex) {
+	    	ex.printStackTrace();
+	    }
+		
+		return "";
+	}
 	// ------------------------
 	  // PRIVATE FIELDS
 	  // ------------------------
