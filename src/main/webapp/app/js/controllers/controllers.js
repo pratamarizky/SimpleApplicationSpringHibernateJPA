@@ -5,8 +5,8 @@ simpleAppControllers.run(function ($rootScope, $route) {
     $rootScope.dateFormat = 'dd-MMMM-yyyy';
     $rootScope.employee = {};
 })
-    .controller('inputController', ['$scope', '$rootScope', 'Employee','saveEmployee', 'District',
-        function ($scope, $rootScope, Employee, saveEmployee, District) {
+    .controller('inputController', ['$scope', '$rootScope', 'Employee', 'District',
+        function ($scope, $rootScope, Employee, District) {
             $scope.title = "input";
 
             $scope.genderData = [
@@ -15,7 +15,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
             ];
 
             $scope.genderOptions = {
-                placeholder: "'Select...'",
+                placeholder: "Pilih Jenis Kelamin",
                 dataTextField: 'name',
                 dataValueField: 'value',
                 dataSource: {
@@ -33,29 +33,29 @@ simpleAppControllers.run(function ($rootScope, $route) {
             //     "Asep"
             // ];
 
-            $scope.gridData = [
-                {
-                    name: "Asep",
-                    bornDate: "1988-10-21T13:28:06.419Z",
-                    gender: "Pria",
-                    joinDate: "1988-10-21T13:28:06.419Z",
-                    address: "Bandung"
-                },
-                {
-                    name: "Hasna",
-                    bornDate: "1988-10-21T13:28:06.419Z",
-                    gender: "Wanita",
-                    joinDate: "1988-10-21T13:28:06.419Z",
-                    address: "Bandung"
-                },
-                {
-                    name: "Irma",
-                    bornDate: "1988-10-21T13:28:06.419Z",
-                    gender: "Wanita",
-                    joinDate: "1988-10-21T13:28:06.419Z",
-                    address: "Bandung"
-                }
-            ];
+            // $scope.gridData = [
+            //     {
+            //         name: "Asep",
+            //         bornDate: "1988-10-21T13:28:06.419Z",
+            //         gender: "Pria",
+            //         joinDate: "1988-10-21T13:28:06.419Z",
+            //         address: "Bandung"
+            //     },
+            //     {
+            //         name: "Hasna",
+            //         bornDate: "1988-10-21T13:28:06.419Z",
+            //         gender: "Wanita",
+            //         joinDate: "1988-10-21T13:28:06.419Z",
+            //         address: "Bandung"
+            //     },
+            //     {
+            //         name: "Irma",
+            //         bornDate: "1988-10-21T13:28:06.419Z",
+            //         gender: "Wanita",
+            //         joinDate: "1988-10-21T13:28:06.419Z",
+            //         address: "Bandung"
+            //     }
+            // ];
 
             $scope.gridColumns = [
                 { field: "employeeName", title: "Nama" },
@@ -66,6 +66,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
             ];
             $scope.onChange = function (data) {
                 $scope.selected = data;
+                console.log($scope.selected);
                 // console.log(moment($scope.selected.joinDate).format("DD-MM-YYYY"));
             };
 
@@ -84,9 +85,11 @@ simpleAppControllers.run(function ($rootScope, $route) {
             //         data: $scope.districtData
             //     }
             // }
-            $scope.districtDataSource = [
-                { districtName: 'Bandung', districtCode: "D" }
-            ]
+
+            // $scope.districtDataSource = [
+            //     // { districtName: 'Bandung', districtCode: "D" }
+
+            // ]
 
 
             Employee.getAll().then(function success(data) {
@@ -102,12 +105,12 @@ simpleAppControllers.run(function ($rootScope, $route) {
             });
 
 
-            // District.getAll().then(function success(data) {
-            //     $scope.districtOptions.dataSource.data = data.data;
-            //     console.log($scope.districtOptions.dataSource.data);
-            // }, function error(error) {
-            //     console.log(error);
-            // });
+            District.getAll().then(function success(data) {
+               $scope.districtDataSource = data.data;
+                console.log($scope.districtDataSource);
+            }, function error(error) {
+                console.log(error);
+            });
 
             // District.getAll().then(function success(data) {
             //     $scope.districtOptions.dataSource.data = data.data;
@@ -134,11 +137,31 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 // $scope.employee.joinDate = employee.joinDate;
                 // console.log(employee.employeeName);
                 console.log(employee.birthDate);
-                employee.birthDate = kendo.parseDate(employee.birthDate, "yyyy-mm-dd");
+                // employee.birthDate = kendo.parseDate(employee.birthDate, "yyyy-mm-dd");
                 console.log(employee.birthDate);
                 $scope.json = angular.toJson(employee);
                 console.log($scope.json);
-                Employee.save($scope.json);
+                Employee.save($scope.json).success(function(){
+                    location.reload();
+                });
             };
+
+            $scope.deleteEmployee = function(){
+                var employee ={};
+                var district ={};
+                console.log($scope.selected.district.districtCode);
+                employee.employeeName = $scope.selected.employeeName;
+                employee.employeeCode = $scope.selected.employeeCode;
+                employee.gender = $scope.selected.gender;
+                district.districtCode = $scope.selected.district.districtCode;
+                district.districtName = $scope.selected.district.districtName;
+                employee.district = district;
+                employee.birthDate = kendo.parseDate($scope.selected.birthDate,"yyyy-mm-dd");
+                employee.joinDate = kendo.parseDate($scope.selected.joinDate,"yyyy-mm-dd");
+                $scope.json = angular.toJson(employee);
+                 Employee.delete($scope.json).success(function(){
+                    location.reload();
+                });
+            }
 
         }]);

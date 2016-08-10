@@ -37,7 +37,7 @@
             <label for="simple-input">Kelurahan</label>
             <!--<input kendo-combo-box ng-model="district" k-on-change="selectedDistrict(data)" k-options='districtOptions' style="width: 100%;" />-->
             <select kendo-combo-box
-                k-placeholder="'Select product'"
+                k-placeholder="'Pilih kelurahan'"
                 k-ng-model="employee.district"
                 k-data-text-field="'districtName'"
                 k-data-value-field="'districtCode'"
@@ -63,7 +63,7 @@
     <br>
     <div class="col-md-offset-10">
         <kendo-button ng-click="createEmployee(employee)">Save</kendo-button>
-        <kendo-button ng-click="onClick2()">Hapus</kendo-button>
+        <kendo-button ng-click="deleteEmployee()">Hapus</kendo-button>
         <kendo-button ng-click="onClick3()">Batal</kendo-button>
     </div>
 
