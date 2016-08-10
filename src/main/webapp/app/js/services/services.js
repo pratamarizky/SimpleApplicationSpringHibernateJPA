@@ -31,6 +31,13 @@ simpleAppServices.factory('Employee', ['$resource', '$rootScope', '$http',
                     'Content-Type':'application/json',
                     data : data
                 })
+            },
+            searchEmployee: function(data){
+                console.log(data);
+                return $http({
+                    url: urlBase + '/get/'+ data,
+                    method: "GET"
+                })
             }
 
         }
@@ -64,3 +71,4 @@ simpleAppServices.factory('District', ['$resource', '$http',
         }
     }]);
 
+    

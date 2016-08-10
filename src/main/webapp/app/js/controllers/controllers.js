@@ -60,7 +60,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
             $scope.gridColumns = [
                 { field: "employeeName", title: "Nama" },
                 { field: "birthDate", type: "date", title: "Tanggal Lahir" },
-                { field: "gender", title: "Tanggal Lahir" },
+                { field: "gender", title: "Jenis Kelamin" },
                 { field: "joinDate", title: "Tanggal Masuk" },
                 { field: "employeeAddress", title: "Alamat" }
             ];
@@ -96,17 +96,32 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 $scope.gridData = data.data;
                 var names = [];
                 angular.forEach($scope.gridData, function (value) {
-                    this.push(value.employeeName);
+                    this.push(value.employeeName, value.employeeAddress);
                 }, names);
-                $scope.searchEmployees = names;
-                console.log(names);
+                var names2 = [];
+                var i, j, unique;
+                var l = names.length;
+                for (i = 0; i < l; i++) {
+                    unique = true;
+                    if (names2.length != 0)
+                        for (j = 0; j < names2.length; j++) {
+                            if (names[i] == names2[j])
+                                unique = false;
+                        }
+
+                    if (unique) {
+                        names2.push(names[i]);
+                    }
+                }
+                $scope.searchEmployees = names2;
+                console.log(names2);
             }, function error(error) {
                 console.log(error);
             });
 
 
             District.getAll().then(function success(data) {
-               $scope.districtDataSource = data.data;
+                $scope.districtDataSource = data.data;
                 console.log($scope.districtDataSource);
             }, function error(error) {
                 console.log(error);
@@ -129,7 +144,7 @@ simpleAppControllers.run(function ($rootScope, $route) {
             //     $rootScope.selectedEmployee = Employee;
             // };
             $scope.createEmployee = function (employee) {
-                
+
                 //$scope.employee = new Employee();
                 // $scope.employee.employeeName = employee.employeeName;
                 // $scope.employee.employeeAddress = employee.employeeAddress;
@@ -141,14 +156,19 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 console.log(employee.birthDate);
                 $scope.json = angular.toJson(employee);
                 console.log($scope.json);
-                Employee.save($scope.json).success(function(){
-                    location.reload();
+                Employee.save($scope.json).success(function () {
+                    Employee.getAll().then(function success(data) {
+                        $scope.gridData = data.data;
+                        // $scope.gridData.read();
+                    }, function error(error) {
+                        console.log(error);
+                    });
                 });
             };
 
-            $scope.deleteEmployee = function(){
-                var employee ={};
-                var district ={};
+            $scope.deleteEmployee = function () {
+                var employee = {};
+                var district = {};
                 console.log($scope.selected.district.districtCode);
                 employee.employeeName = $scope.selected.employeeName;
                 employee.employeeCode = $scope.selected.employeeCode;
@@ -156,12 +176,39 @@ simpleAppControllers.run(function ($rootScope, $route) {
                 district.districtCode = $scope.selected.district.districtCode;
                 district.districtName = $scope.selected.district.districtName;
                 employee.district = district;
-                employee.birthDate = kendo.parseDate($scope.selected.birthDate,"yyyy-mm-dd");
-                employee.joinDate = kendo.parseDate($scope.selected.joinDate,"yyyy-mm-dd");
+                employee.birthDate = kendo.parseDate($scope.selected.birthDate, "yyyy-mm-dd");
+                employee.joinDate = kendo.parseDate($scope.selected.joinDate, "yyyy-mm-dd");
                 $scope.json = angular.toJson(employee);
-                 Employee.delete($scope.json).success(function(){
-                    location.reload();
+                Employee.delete($scope.json).success(function () {
+                    Employee.getAll().then(function success(data) {
+                        $scope.gridData = data.data;
+                        // $scope.gridData.read();
+                    }, function error(error) {
+                        console.log(error);
+                    });
                 });
             }
+
+            $scope.searchValue = function () {
+                // $scope.searchEmp = data;
+                console.log($scope.searchEmp);
+                // console.log(moment($scope.selected.joinDate).format("DD-MM-YYYY"));
+                if ($scope.searchEmp == "") {
+                    Employee.getAll().then(function success(data) {
+                        $scope.gridData = data.data;
+                        // $scope.gridData.read();
+                    }, function error(error) {
+                        console.log(error);
+                    });
+                }
+                else {
+                    Employee.searchEmployee($scope.searchEmp).then(function success(data) {
+                        $scope.gridData = data.data;
+                    }, function error(error) {
+                        console.log(error);
+                    });
+                }
+
+            };;
 
         }]);
